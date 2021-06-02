@@ -9,6 +9,7 @@ import * as appActions from '../actions/app.actions';
 import { AppState } from '../models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
+import { ExternalService } from '../shared/external.service';
 
 const jwtDecode = require('jwt-decode');
 const cloneDeep = require('lodash/cloneDeep');
@@ -23,6 +24,7 @@ export class GeneralEffects {
 
     constructor(private store: Store<AppState>,
                 private activatedRoute: ActivatedRoute,
+                private externalService: ExternalService,
                 private window: Window,
                 @Inject(DOCUMENT) private document: any,
                 private actions$: Actions,

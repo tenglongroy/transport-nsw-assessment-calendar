@@ -15,6 +15,8 @@ import { globalRippleConfig } from './shared/common-utilities';
 import { appReducer } from './reducers/app.reducer';
 import { GeneralEffects } from './effects/general.effects';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { infoReducer } from './reducers/info.reducer';
+import { CalendarComponent } from './components/calendar.component';
 
 
 const imports: any[] = [
@@ -25,6 +27,7 @@ const imports: any[] = [
     AppRoutingModule,
     StoreModule.forRoot({
         app: appReducer,
+        info: infoReducer,
     }),
     EffectsModule.forRoot([GeneralEffects]),
 ];
@@ -40,22 +43,21 @@ if (!environment.production) {
 
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    StoreModule.forRoot({}, {})
-  ],
-  providers: [
-    { provide: Window, useValue: window },
-    { provide: MAT_RIPPLE_GLOBAL_OPTIONS, useValue: globalRippleConfig },
-    {
-        provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-        useValue: { appearance: 'fill' }
-    }
-],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        CalendarComponent
+    ],
+    imports: [
+        imports
+    ],
+    providers: [
+        { provide: Window, useValue: window },
+        { provide: MAT_RIPPLE_GLOBAL_OPTIONS, useValue: globalRippleConfig },
+        {
+            provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+            useValue: { appearance: 'fill' }
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

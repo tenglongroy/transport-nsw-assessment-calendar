@@ -1,3 +1,3 @@
 export interface IApp{
-    loading: boolean;
+    app_loading: boolean;
 }
