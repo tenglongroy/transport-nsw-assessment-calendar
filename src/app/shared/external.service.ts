@@ -21,7 +21,9 @@ export class ExternalService {
         return this.http.get<any>('https://jaideportal-functionapi-public-dev.azurewebsites.net/tfnsw'/* 'https://api.transport.nsw.gov.au/v1/tp/add_info' */, {
             headers: {
                 Authorization: 'apikey ' + environment.APIKEY,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Accept: '*/*',
+                'Accept-Encoding': 'gzip, deflate, br'
             },
             params: httpParams
         });

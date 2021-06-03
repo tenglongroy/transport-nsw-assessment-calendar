@@ -18,7 +18,10 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
     selectedDate = new FormControl(moment());
     dateArray: (string | number)[];
-    /* selectedDate = new FormControl(new Date()); */
+    priorityFilter = new FormControl('');
+    priorityFilterList = ['High', 'Normal', 'Low'];
+    modeFilter = new FormControl('');
+    modeFilterList =['Train', 'Light Rail', 'Bus', 'Coach', 'Ferry', 'School Bus'];
 
     constructor(private store: Store<AppState>,
                 private staticMethod: StaticMethodService) { }
@@ -26,6 +29,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.selectedDate.valueChanges.subscribe(momentValue => {
             this.dateArray = this.staticMethod.generateMonthDayArray(momentValue.year(), momentValue.month());
+            console.log(this.dateArray);
         });
         this.dateArray = this.staticMethod.generateMonthDayArray(this.selectedDate.value.year(), this.selectedDate.value.month());
     }
@@ -44,13 +48,30 @@ export class CalendarComponent implements OnInit, OnDestroy {
         datepicker.close();
     }
 
-    getSelectedMonth(): string {
+    getSelectedMonth(isTruncated?: boolean): string {
         const month = this.selectedDate.value.month();
-        return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][month]?.toUpperCase();
+        let value = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][month]?.toUpperCase();
+        if (isTruncated){
+            value = value.substr(0, 3);
+        }
+        return value;
     }
 
     dateClick(event, date): void {
         const chosenDate = date + '-' + (this.selectedDate.value.month() + 1) + '-' + this.selectedDate.value.year();
         this.store.dispatch(new calendarActions.FetchExternalInfoAction({filterDateValid: chosenDate}));
+    }
+
+    clickFilter(filter: FormControl, optionValue: string){
+        filter.setValue(optionValue);
+    }
+
+    changeMonth(direction: number): void {
+        if (direction < 0){
+            this.selectedDate.setValue(this.selectedDate.value.add(-1, 'M'));
+        }
+        else{
+            this.selectedDate.setValue(this.selectedDate.value.add(1, 'M'));
+        }
     }
 }

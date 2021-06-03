@@ -47,8 +47,8 @@ export class StaticMethodService {
     }
     setThePrintLoop(s, d): any[] {
         const DayArray = []
-        for (let i = 0; i < 35; i++) {
-            if (i >= (s) && (i - s) < 31) {
+        for (let i = 0; i < 37; i++) {
+            if (i >= (s) && (i - s) < d) {
                 DayArray.push(i - s + 1);
             }
             else {

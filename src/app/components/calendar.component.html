@@ -1,18 +1,46 @@
 <div class="calendar-container">
+
+    <div class="calendar-filter-container">
+        <h4 class="filter-title">Filters:</h4>
+        <div class="calendar-filter-set">
+            <h5 class="filter-set-header">Priority</h5>
+            <div class="filter-options">
+                <div class="filter-option-list" (click)="clickFilter(priorityFilter, filter)"
+                    *ngFor="let filter of priorityFilterList || []; index as ind">
+                    <div class="filter-option-item" [ngClass]="{'active': priorityFilter.value == filter}">{{filter}}</div>
+                </div>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="calendar-filter-set">
+            <h5 class="filter-set-header">Mode</h5>
+            <div class="filter-options">
+                <div class="filter-option-list" (click)="clickFilter(modeFilter, filter)"
+                    *ngFor="let filter of modeFilterList || []; index as ind">
+                    <div class="filter-option-item" [ngClass]="{'active': modeFilter.value == filter}">{{filter}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="calendar-container-inner">
         <div class="calendar-control">
-            <input  matInput [matDatepicker]="datepicker" [formControl]="selectedDate" readonly>
-            <mat-datepicker-toggle matSuffix [for]="datepicker">
-                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-            </mat-datepicker-toggle>
-            <mat-datepicker #datepicker startView="multi-year" [startAt]="selectedDate" (yearSelected)="chosenYearHandler($event)" (monthSelected)="chosenMonthHandler($event, datepicker)">
-            </mat-datepicker>
-            <button mat-icon-button aria-label="Go to previous month">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button mat-icon-button aria-label="Go to next month">
-                <i class="fas fa-chevron-right"></i>
-            </button>
+            <div class="calendar-control-left">
+                <input class="invisible" matInput [matDatepicker]="datepicker" [formControl]="selectedDate" readonly>
+                <mat-datepicker-toggle class="invisible" matSuffix [for]="datepicker">
+                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <button mat-flat-button (click)="datepicker.open()">{{getSelectedMonth(true) + ' ' + selectedDate.value.year()}}<mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon></button>
+                <mat-datepicker #datepicker startView="multi-year" [startAt]="selectedDate" (yearSelected)="chosenYearHandler($event)" (monthSelected)="chosenMonthHandler($event, datepicker)">
+                </mat-datepicker>
+            </div>
+            <div class="calendar-control-right">
+                <button mat-icon-button aria-label="Go to previous month" (click)="changeMonth(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button mat-icon-button aria-label="Go to next month" (click)="changeMonth(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
         </div>
         <div class="calendar-body">
             <div class="calendar-day-row">

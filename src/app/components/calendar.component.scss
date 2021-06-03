@@ -1,15 +1,60 @@
 
 .calendar-container{
-    max-width: 500px;
+    max-width: 800px;
     text-align: center;
-    .calendar-container-inner{
-
+    display: grid;
+    grid-template-columns: minmax(100px, 150px) 2fr;
+    margin: 20px auto;
+    h4, h5{
+        margin: 5px 0;
     }
 
+    .calendar-filter-container{
+        text-align: left;
+        .calendar-filter-set{
+            margin: 10px 0;
+        }
+    }
+    .filter-option-list{
+        padding: 5px 0 0;
+        .filter-option-item{
+            display: inline-flex;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+            &::before{
+                content: '';
+                display: inline-block;
+                border: 1px solid #a6a6a6;
+                background-color: #fff;
+                border-radius: 3px;
+                height: 18px;
+                width: 18px;
+                margin-right: 6px;
+            }
+            &.active::after{
+                content: '';
+                display: inline-block;
+                border-radius: 2px;
+                background-color: #0068b5;
+                height: 12px;
+                width: 12px;
+                position: absolute;
+                top: 4px;
+                left: 4px;
+            }
+        }
+    }
+
+    .calendar-container-inner{
+        max-width: 500px;
+    }
     .calendar-control{
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: relative;
+        padding-right: 1rem;
     }
     .calendar-body{
         .calendar-day-row,

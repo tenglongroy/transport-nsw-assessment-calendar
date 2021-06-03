@@ -22,3 +22,13 @@ body{
 .align-center{
     align-items: center;
 }
+
+.invisible{
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    max-width: 0;
+    max-height: 0;
+    border: none;
+}
