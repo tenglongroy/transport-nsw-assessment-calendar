@@ -8,5 +8,8 @@ export function appReducer(state = { app_loading: false }, action: appActions.Ac
         case appActions.APP_LOADING_FINISHED: {
             return Object.assign({}, state, { app_loading: false });
         }
+        default: {
+            return state;
+        }
     }
 }

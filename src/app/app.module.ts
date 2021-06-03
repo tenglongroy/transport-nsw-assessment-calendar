@@ -9,7 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
-import { MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core';
 import { environment } from 'src/environments/environment';
 import { globalRippleConfig } from './shared/common-utilities';
 import { appReducer } from './reducers/app.reducer';
@@ -17,6 +17,10 @@ import { GeneralEffects } from './effects/general.effects';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { infoReducer } from './reducers/info.reducer';
 import { CalendarComponent } from './components/calendar.component';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { calendarReducer } from './reducers/calendar.reducer';
+
+
 
 
 const imports: any[] = [
@@ -28,6 +32,7 @@ const imports: any[] = [
     StoreModule.forRoot({
         app: appReducer,
         info: infoReducer,
+        calendar: calendarReducer,
     }),
     EffectsModule.forRoot([GeneralEffects]),
 ];
@@ -52,11 +57,6 @@ if (!environment.production) {
     ],
     providers: [
         { provide: Window, useValue: window },
-        { provide: MAT_RIPPLE_GLOBAL_OPTIONS, useValue: globalRippleConfig },
-        {
-            provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-            useValue: { appearance: 'fill' }
-        }
     ],
     bootstrap: [AppComponent]
 })

@@ -1,0 +1,39 @@
+<div class="calendar-container">
+    <div class="calendar-container-inner">
+        <div class="calendar-control">
+            <input  matInput [matDatepicker]="datepicker" [formControl]="selectedDate" readonly>
+            <mat-datepicker-toggle matSuffix [for]="datepicker">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #datepicker startView="multi-year" [startAt]="selectedDate" (yearSelected)="chosenYearHandler($event)" (monthSelected)="chosenMonthHandler($event, datepicker)">
+            </mat-datepicker>
+            <button mat-icon-button aria-label="Go to previous month">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button mat-icon-button aria-label="Go to next month">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        <div class="calendar-body">
+            <div class="calendar-day-row">
+                <div class="calendar-day" matTooltip="Sunday" aria-label="Sunday">S</div>
+                <div class="calendar-day" matTooltip="Monday" aria-label="Monday">M</div>
+                <div class="calendar-day" matTooltip="Tuesday" aria-label="Tuesday">T</div>
+                <div class="calendar-day" matTooltip="Wednesday" aria-label="Wednesday">W</div>
+                <div class="calendar-day" matTooltip="Thursday" aria-label="Thursday">T</div>
+                <div class="calendar-day" matTooltip="Friday" aria-label="Friday">F</div>
+                <div class="calendar-day" matTooltip="Saturday" aria-label="Saturday">S</div>
+            </div>
+            <div class="month-display">
+                <div class="month-display-text">{{getSelectedMonth()}}</div>
+            </div>
+            <div class="calendar-dates">
+                <div class="calendar-date-item" matRipple [matRippleCentered]="true" [matRippleRadius]="40" [matRippleDisabled]="!dateItem"
+                    *ngFor="let dateItem of dateArray || []; index as ind" [ngClass]="{'empty-date': !dateItem}"
+                    (click)="dateClick($event, dateItem)">
+                    {{dateItem}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-export interface IInfo{
+export interface IAlertInfo{
     type: string;
     id: string;
     version: number | string;

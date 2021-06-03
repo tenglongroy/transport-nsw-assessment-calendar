@@ -1,0 +1,53 @@
+
+.calendar-container{
+    max-width: 500px;
+    text-align: center;
+    .calendar-container-inner{
+
+    }
+
+    .calendar-control{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .calendar-body{
+        .calendar-day-row,
+        .calendar-dates{
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+        }
+        .calendar-day-row{
+            border-bottom: 1px solid #ddd;
+        }
+        .month-display{
+            text-align: left;
+            padding-left: 15px;
+            line-height: 40px;
+        }
+
+        .calendar-day,
+        .calendar-date-item{
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border-radius: 50%;
+        }
+        .calendar-day{
+            cursor: context-menu;
+        }
+        .calendar-date-item{
+            /* transition: 0.2s all ease; */
+            cursor: pointer;
+            &:hover{
+                background-color: #ddd;
+            }
+            &.empty-date{
+                cursor: context-menu;
+                &:hover{
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+}

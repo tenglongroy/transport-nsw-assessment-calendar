@@ -17,16 +17,14 @@ export class StaticMethodService {
 
     }
 
-    generateMonthDayArray(): any[] {
-        const now = new Date();
+    generateMonthDayArray(year: number, month: number): any[] {
+        /* const now = new Date();
         const day = now.getDate();
         const month = now.getMonth();
-        const year = now.getFullYear();
+        const year = now.getFullYear(); */
         const days = this.getMonthDays(month + 1, year);
         const firstDay = new Date(year, month, 1);
-        console.log(firstDay, days)
         const startDay = firstDay.getDay();
-        console.log(startDay, 'the starting day')
         return this.setThePrintLoop(startDay, days)
     }
     getMonthDays(month, year): number {

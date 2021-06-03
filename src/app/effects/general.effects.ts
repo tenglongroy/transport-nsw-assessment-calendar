@@ -5,6 +5,7 @@ import { of, from, Subscription, EMPTY, forkJoin } from 'rxjs';
 import { catchError , switchMap, map, mergeMap } from 'rxjs/operators';
 
 import * as appActions from '../actions/app.actions';
+import * as calendarActions from '../actions/calendar.actions';
 
 import { AppState } from '../models';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -33,4 +34,26 @@ export class GeneralEffects {
             this.queryParams = value;
         });
     }
+
+    fetchExternalInfo$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(calendarActions.FETCH_EXTERNAL_INFO),
+            switchMap((action: calendarActions.FetchExternalInfoAction) => {
+                this.store.dispatch(new appActions.CalendarLoadingAction());
+                return this.externalService.getAddInfo(action.payload).pipe(
+                    map(response => {
+                        this.store.dispatch(new calendarActions.FetchExternalInfoSuccessAction(response));
+                        const calendarLoadingFinishAction = new appActions.CalendarLoadingFinishAction();
+                        return calendarLoadingFinishAction;
+                    }),
+                    catchError( error => {
+                        console.log('FetchExternalInfoAction error', error);
+                        this.store.dispatch(new calendarActions.FetchExternalInfoFailAction());
+                        const appLoadingErrorAction = new appActions.AppLoadingErrorAction(error?.error || error);
+                        return of(appLoadingErrorAction);
+                    })
+                );
+            })
+        );
+    });
 }
