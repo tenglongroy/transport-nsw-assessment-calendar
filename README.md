@@ -1,9 +1,22 @@
 # transport-nsw-assessment-calendar
 An online assessment from Transport NSW for the role Web Developer to build a calendar for displaying incidents and alerts.
 
+## Introduction
+This is an Angular 10 app, which uses RxJS and NgRx.
 
 
+## Future Features
+- pre-fetch previous month and next month data, to avoid waiting
+- set environments for dev and production
+- ServiceWorker
+- PWA
 
+
+## Development server
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+
+## Issues
 Keep throwing 500 Internal Serer Error like below. Cannot find out the root of it. Header has set Authorization: apikey **** and this can run through Postman.
 ```
 <?xml version="1.0" encoding="UTF-8"?>
