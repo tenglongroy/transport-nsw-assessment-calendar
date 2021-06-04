@@ -16,22 +16,23 @@ import * as calendarActions from '../actions/calendar.actions';
 })
 export class CalendarComponent implements OnInit, OnDestroy {
 
-    selectedDate = new FormControl(moment());
+    selectedMonth = new FormControl(moment());
     dateArray: (string | number)[];
     priorityFilter = new FormControl('');
     priorityFilterList = ['High', 'Normal', 'Low'];
     modeFilter = new FormControl('');
     modeFilterList =['Train', 'Light Rail', 'Bus', 'Coach', 'Ferry', 'School Bus'];
+    selectedDate: number;
 
     constructor(private store: Store<AppState>,
                 private staticMethod: StaticMethodService) { }
 
     ngOnInit(): void {
-        this.selectedDate.valueChanges.subscribe(momentValue => {
+        this.selectedMonth.valueChanges.subscribe(momentValue => {
             this.dateArray = this.staticMethod.generateMonthDayArray(momentValue.year(), momentValue.month());
             console.log(this.dateArray);
         });
-        this.dateArray = this.staticMethod.generateMonthDayArray(this.selectedDate.value.year(), this.selectedDate.value.month());
+        this.dateArray = this.staticMethod.generateMonthDayArray(this.selectedMonth.value.year(), this.selectedMonth.value.month());
     }
     ngOnDestroy(): void {
     }
@@ -42,14 +43,14 @@ export class CalendarComponent implements OnInit, OnDestroy {
         /* console.log(event); */
     }
     chosenMonthHandler(normalizedMonth, datepicker: MatDatepicker<Moment>) {
-        const ctrlValue = this.selectedDate.value;
+        const ctrlValue = this.selectedMonth.value;
         ctrlValue.month(normalizedMonth.month());
-        this.selectedDate.setValue(ctrlValue);
+        this.selectedMonth.setValue(ctrlValue);
         datepicker.close();
     }
 
     getSelectedMonth(isTruncated?: boolean): string {
-        const month = this.selectedDate.value.month();
+        const month = this.selectedMonth.value.month();
         let value = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][month]?.toUpperCase();
         if (isTruncated){
             value = value.substr(0, 3);
@@ -58,8 +59,9 @@ export class CalendarComponent implements OnInit, OnDestroy {
     }
 
     dateClick(event, date): void {
-        const chosenDate = date + '-' + (this.selectedDate.value.month() + 1) + '-' + this.selectedDate.value.year();
+        const chosenDate = ('0' + date).slice(-2) + '-' + ('0' + (this.selectedMonth.value.month() + 1)).slice(-2) + '-' + this.selectedMonth.value.year();
         this.store.dispatch(new calendarActions.FetchExternalInfoAction({filterDateValid: chosenDate}));
+        this.selectedDate = date;
     }
 
     clickFilter(filter: FormControl, optionValue: string){
@@ -68,10 +70,11 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
     changeMonth(direction: number): void {
         if (direction < 0){
-            this.selectedDate.setValue(this.selectedDate.value.add(-1, 'M'));
+            this.selectedMonth.setValue(this.selectedMonth.value.add(-1, 'M'));
         }
         else{
-            this.selectedDate.setValue(this.selectedDate.value.add(1, 'M'));
+            this.selectedMonth.setValue(this.selectedMonth.value.add(1, 'M'));
         }
+        this.selectedDate = undefined;
     }
 }

@@ -1,3 +1,4 @@
+$primary: #0068b5 !default;
 
 .calendar-container{
     max-width: 800px;
@@ -82,7 +83,7 @@
             cursor: context-menu;
         }
         .calendar-date-item{
-            /* transition: 0.2s all ease; */
+            transition: 0.2s all ease;
             cursor: pointer;
             &:hover{
                 background-color: #ddd;
@@ -92,6 +93,10 @@
                 &:hover{
                     background-color: transparent;
                 }
+            }
+            &.active{
+                color: #fff;
+                background-color: $primary;
             }
         }
     }

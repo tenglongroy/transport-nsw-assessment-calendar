@@ -25,12 +25,12 @@
     <div class="calendar-container-inner">
         <div class="calendar-control">
             <div class="calendar-control-left">
-                <input class="invisible" matInput [matDatepicker]="datepicker" [formControl]="selectedDate" readonly>
+                <input class="invisible" matInput [matDatepicker]="datepicker" [formControl]="selectedMonth" readonly>
                 <mat-datepicker-toggle class="invisible" matSuffix [for]="datepicker">
                     <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                 </mat-datepicker-toggle>
-                <button mat-flat-button (click)="datepicker.open()">{{getSelectedMonth(true) + ' ' + selectedDate.value.year()}}<mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon></button>
-                <mat-datepicker #datepicker startView="multi-year" [startAt]="selectedDate" (yearSelected)="chosenYearHandler($event)" (monthSelected)="chosenMonthHandler($event, datepicker)">
+                <button mat-flat-button (click)="datepicker.open()">{{getSelectedMonth(true) + ' ' + selectedMonth.value.year()}}<mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon></button>
+                <mat-datepicker #datepicker startView="multi-year" [startAt]="selectedMonth" (yearSelected)="chosenYearHandler($event)" (monthSelected)="chosenMonthHandler($event, datepicker)">
                 </mat-datepicker>
             </div>
             <div class="calendar-control-right">
@@ -57,7 +57,7 @@
             </div>
             <div class="calendar-dates">
                 <div class="calendar-date-item" matRipple [matRippleCentered]="true" [matRippleRadius]="40" [matRippleDisabled]="!dateItem"
-                    *ngFor="let dateItem of dateArray || []; index as ind" [ngClass]="{'empty-date': !dateItem}"
+                    *ngFor="let dateItem of dateArray || []; index as ind" [ngClass]="{'empty-date': !dateItem, 'active': !!selectedDate && selectedDate==dateItem}"
                     (click)="dateClick($event, dateItem)">
                     {{dateItem}}
                 </div>
