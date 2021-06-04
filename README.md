@@ -7,6 +7,16 @@ This application was built in two nights, because during daytime I'm a full-time
 This is an Angular 10 app, which uses RxJS and NgRx.
 
 
+## Run and Test
+This application has only basic configuration, which means to run locally and build, just use below basic NPM & Angular command:
+```
+npm start
+```
+```
+ng build
+```
+
+
 ## Future Features
 - pre-fetch previous month and next month data, to avoid waiting
 - set environments for dev and production
