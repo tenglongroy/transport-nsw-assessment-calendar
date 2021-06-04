@@ -21,7 +21,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
     priorityFilter = new FormControl('');
     priorityFilterList = ['High', 'Normal', 'Low'];
     modeFilter = new FormControl('');
-    modeFilterList =['Train', 'Light Rail', 'Bus', 'Coach', 'Ferry', 'School Bus'];
+    modeFilterList =[['Train', 1], ['Light Rail', 4], ['Bus', 5], ['Coach', 7], ['Ferry', 9], ['School Bus', 11]];
     selectedDate: number;
 
     constructor(private store: Store<AppState>,
@@ -60,6 +60,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
     dateClick(event, date): void {
         const chosenDate = ('0' + date).slice(-2) + '-' + ('0' + (this.selectedMonth.value.month() + 1)).slice(-2) + '-' + this.selectedMonth.value.year();
+        /* const chosenMode = this.modeFilterList.find(mode => mode[0] == this.modeFilter.value)?.[1]; */     // get the type number of the mode
         this.store.dispatch(new calendarActions.FetchExternalInfoAction({filterDateValid: chosenDate}));
         this.selectedDate = date;
     }

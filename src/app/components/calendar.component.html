@@ -15,9 +15,9 @@
         <div class="calendar-filter-set">
             <h5 class="filter-set-header">Mode</h5>
             <div class="filter-options">
-                <div class="filter-option-list" (click)="clickFilter(modeFilter, filter)"
+                <div class="filter-option-list" (click)="clickFilter(modeFilter, filter[0])"
                     *ngFor="let filter of modeFilterList || []; index as ind">
-                    <div class="filter-option-item" [ngClass]="{'active': modeFilter.value == filter}">{{filter}}</div>
+                    <div class="filter-option-item" [ngClass]="{'active': modeFilter.value == filter[0]}">{{filter[0]}}</div>
                 </div>
             </div>
         </div>

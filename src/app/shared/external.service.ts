@@ -13,7 +13,7 @@ export class ExternalService {
     constructor(private http: HttpClient) { }
 
     getAddInfo(extraParam: {}): Observable<any> {
-        const newParams = Object.assign({outputFormat: 'rapidJSON', version: '10.2.1.42', filterPublicationStatus: 'current', filterMOTType: 5}, extraParam);
+        const newParams = Object.assign({outputFormat: 'rapidJSON', version: '10.2.1.42', filterPublicationStatus: 'current'}, extraParam);
         let httpParams = new HttpParams();
         Object.keys(newParams).forEach(key => {
             httpParams = httpParams.append(key, newParams[key]);
