@@ -1,6 +1,8 @@
 # transport-nsw-assessment-calendar
 An online assessment from Transport NSW for the role Web Developer to build a calendar for displaying incidents and alerts.
 
+This application was built in two nights, because during daytime I'm a full-time employee. This application is still in progress, because below API access issues could not be solved.
+
 ## Introduction
 This is an Angular 10 app, which uses RxJS and NgRx.
 
