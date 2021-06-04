@@ -17,7 +17,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 
 ## Issues
-Keep throwing 500 Internal Serer Error like below. Cannot find out the root of it. Header has set Authorization: apikey **** and this can run through Postman.
+When tried to access API data from Angular app, it kept throwing 500 Internal Serer Error like below. Cannot find out the root of it. Header has set Authorization: apikey xxxx and this can run through Postman.
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
